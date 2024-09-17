@@ -1,0 +1,70 @@
+<!-- FILEPATH: /Users/rangelkoli/Documents/MSCS/CoverLetterMake/templates/index.html -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cover Letter Maker</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        text-align: center;
+      }
+
+      .input-field {
+        margin-bottom: 20px;
+      }
+
+      .input-field label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .input-field input,
+      .input-field textarea {
+        width: 600px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+      }
+
+      .input-field textarea {
+        height: 150px;
+      }
+
+      .submit-btn {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .submit-btn:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Cover Letter Maker</h1>
+      <form action="/coverLetter" method="POST">
+        <div class="input-field">
+          <label for="company-name">Job Link:</label>
+          <input type="text" id="company-name" name="job-link" required />
+        </div>
+        <button class="submit-btn" type="submit">Generate Cover Letter</button>
+      </form>
+    </div>
+  </body>
+</html>
