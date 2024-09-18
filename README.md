@@ -4,18 +4,9 @@ CoverCraft is an AI-driven tool that generates personalized cover letters in sec
 
 ![Logo](./CoverCraftLogo.jpg)
 
-## Features
-
-- Light/dark mode toggle
-- Live previews
-- Fullscreen mode
-- Cross platform
-
 ## Tech Stack
 
-**Client:** Flask
-
-**Server:** Python
+All code is written in Python using Flask
 
 ## Installation
 
