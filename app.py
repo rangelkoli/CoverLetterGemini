@@ -5,8 +5,10 @@ import google.generativeai as genai
 from docx import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from bs4 import BeautifulSoup
+from dotenv import load_dotenv
 
-
+from dotenv import load_dotenv
+import os
 app = Flask(__name__)
 
 resume = """
@@ -54,7 +56,7 @@ Extra-Curricular
 
 
 def generateAttentionHook(job_description):
-    genai.configure(api_key="AIzaSyAtimh0GtwktWj417JuL9Wsh48uLwsAFfQ")
+    genai.configure(api_key=os.environ.get("API_KEY"))
 
     model = genai.GenerativeModel("gemini-1.5-flash")
 
@@ -74,7 +76,7 @@ def generateAttentionHook(job_description):
 @app.route("/coverLetter", methods=["POST", "GET"])
 def generate_cover_letter():
     if request.method == "POST":
-        genai.configure(api_key="AIzaSyAtimh0GtwktWj417JuL9Wsh48uLwsAFfQ")
+        genai.configure(api_key=os.environ.get("API_KEY"))
 
         job_description = request.form.get("job-description")
         job_title = request.form.get("job-title")
@@ -121,9 +123,7 @@ def generate_cover_letter():
     Include specific examples of your work that demonstrate your expertise and passion for the field. Make sure the cover letter is less than 500 words and will fit on one page.
                                     """, )
     
-        document = Document(
-            docx=None        
-        )
+        document = Document(docx=None)
 
         document.add_heading('Cover Letter', 1)
         document.add_heading('Rangel Anselm Koli', level=1)
