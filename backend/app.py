@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 
 from dotenv import load_dotenv
 import os
+import re
 app = Flask(__name__)
 
 resume = """
@@ -88,10 +89,10 @@ def generate_cover_letter():
 
         if response.status_code == 200:
             soup = BeautifulSoup(response.text, 'html.parser')
-            company_name = soup.find("h1", {"class": "top-card-layout__title"}).text
+            job_title = soup.find("h1", {"class": "top-card-layout__title"}).text
 
 
-            job_title = soup.find("a", {"class": "topcard__org-name-link"}).text
+            company_name = soup.find("a", {"class": "topcard__org-name-link"}).text
 
             job_description = soup.find("div", {"class": "show-more-less-html__markup"}).get_text()
 
@@ -119,7 +120,8 @@ def generate_cover_letter():
                                      This is what you have so far: """ + attentionHook + """
                                      DO NOT WRITE THE ATTENTION HOOK AGAIN, but give me the other paragraphs 
     Highlight your achievements and skills, and explain how they make you a perfect fit for the """ + job_title + """ role.
-    Use all the experiences and qualifications in the resume above to write the body of the cover letter. DO NOT HAVE ANY BULLET POINTS, or variables so that the cover letter is complete.
+    """ + resume + """
+    Use all the experiences and qualifications in the resume above to write the body of the cover letter. DO NOT HAVE ANY BULLET POINTS, or variables so that the cover letter is complete. Use the company name and fill in the relevant experiences and qualifications from the resume above.
     Include specific examples of your work that demonstrate your expertise and passion for the field. Make sure the cover letter is less than 500 words and will fit on one page.
                                     """, )
     
@@ -132,7 +134,8 @@ def generate_cover_letter():
         p.add_run("\n")
         s = document.add_paragraph(response.text, style='BodyText')
         s.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
-        docName = f"{job_title}CoverLetter.docx"
+        company_name = "".join(company_name.split())
+        docName = f"{company_name}CoverLetter.docx"
         document.save(
             docName
         )
